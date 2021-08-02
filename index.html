@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>はなび</title>
+		<meta name="viewport" content="width=device-width,user-scalable=no">
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			body {
+				background-color: black;
+			}
+
+			#outer {
+				width: 100%;
+				height: 100vh;
+				margin: 0 auto;
+				position: relative;
+				overflow: hidden;
+			}
+
+			#outer>div {
+				width: 10px;
+				height: 10px;
+				border-radius: 50%;
+				animation: mystory 6s linear 0s 1 normal both;
+				position: absolute;
+			}
+
+			/*CSSアニメーションで花火を動かす*/
+			@keyframes mystory {
+				0% {
+					background-color: skyblue;
+					transform: translate(0px, 0px);
+					box-shadow: 0px 0px 0px lime;
+				}
+
+				16% {
+					transform: translate(-10px, -80px);
+				}
+
+				32% {
+					transform: translate(10px, -160px);
+				}
+
+				50% {
+					background-color: pink;
+					box-shadow: 0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime,
+						0px 0px 0px lime;
+					transform: translate(0px, -240px);
+				}
+
+				90% {
+					opacity: 1;
+				}
+
+				100% {
+					background-color: pink;
+					transform: translate(0px, -300px);
+					box-shadow:
+						100px 0px 1px lime,
+						-100px 0px 1px lime,
+						0px 100px 1px lime,
+						0px -100px 1px lime,
+						50px 80px 1px lime,
+						50px -80px 1px lime,
+						80px 50px 1px lime,
+						80px -50px 1px lime,
+						-50px 80px 1px lime,
+						-50px -80px 1px lime,
+						-80px 50px 1px lime,
+						-80px -50px 1px lime,
+						50px 0px 1px yellow,
+						-50px 0px 1px yellow,
+						0px 50px 1px yellow,
+						0px -50px 1px yellow,
+						25px 40px 1px yellow,
+						25px -40px 1px yellow,
+						40px 25px 1px yellow,
+						40px -25px 1px yellow,
+						-25px 40px 1px yellow,
+						-25px -40px 1px yellow,
+						-40px 25px 1px yellow,
+						-40px -25px 1px yellow;
+					opacity: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="outer"></div>
+		<script>
+			//要素の取得
+			const outer = document.getElementById("outer");
+
+			//花火玉位置を設定
+			const pos = { x: 100, y: 100 };
+
+			//差表を取得して、花火玉を置く
+			document.addEventListener("click", (e) => {
+				e.preventDefault();
+				pos.x = e.clientX;
+				pos.y = e.clientY;
+				let rect = outer.getBoundingClientRect();
+				const div = document.createElement("div");
+				div.style.left = (pos.x - rect.x) + "px";
+				div.style.top = (pos.y - rect.y) + "px";
+
+				const ban = new Audio();
+				ban.src = "ban.mp3";
+				ban.currentTime = 0;
+				ban.play();
+				outer.appendChild(div);
+			})
+
+			/*
+				花火の軌跡や広がるさまはCSSで実装する
+			*/
+
+
+		</script>
+	</body>
+</html>
